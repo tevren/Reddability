@@ -4,8 +4,10 @@ gem 'rails', '3.2.3'
 gem 'sqlite3'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'ruby_reddit_api', :git => 'git://github.com/tevren/RubyRedditAPI.git'
-gem 'diffbot'
+gem 'pismo', :git => 'git://github.com/tevren/pismo.git', :branch => 'merge_with_deplorable'
+gem 'biffbot'
 gem 'whenever'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,8 +22,11 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
-
+gem 'httparty'
+gem 'nokogiri'
+gem 'sanitize'
+gem 'rspec'
+gem 'httpclient'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

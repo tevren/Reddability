@@ -37,9 +37,9 @@ class RedditsController < ApplicationController
     options = Hash.new
     options[:tags] = true
     options[:stats] = true
-    @article = biffbot.parse(@original_url,options)
-#    @article = Pismo::Document.new(@original_url, :reader => :tree)
-    logger.info "#{@article[:stats]}"
+    options[:submission_title] = params[:submission][:title]
+    @article = get_content_from_url(@original_url,options)
+    logger.info "#{@article[:stats].to_s}" 
     @subs = subs
 #    if stale? etag: [@article, current_session]
       respond_to do |format|
@@ -59,6 +59,21 @@ class RedditsController < ApplicationController
         format.xml {render xml: @articles}
       end
 #    end
+  end
+
+  def get_content_from_url(url,options={})
+    unless url.match(/(jpg|png|gif|jpeg|bmp|tiff)$/)
+      biffbot = Biffbot::Base.new(APP_CONFIG['DIFFBOT_TOKEN'])
+      article = biffbot.parse(@original_url,options)
+    else
+      article = Hash.new
+#      raise url.to_s
+      article[:text] = "<img src='#{url}'>"
+#      raise article[:text].to_s
+      article[:title] = options[:submission_title] if options[:submission_title]
+
+    end
+    return article
   end
 
 end

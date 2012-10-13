@@ -6,12 +6,18 @@
 	<li><%= sanitize truncate(@article[:title],:length => 70) if @article[:title] %></li>
 </ul>
 
-<h3><%= sanitize @article[:title] if @article[:title] %></h3>
+<% if @article[:title].blank? %>
+<h4><%= sanitize @submission_title %></h4>
+<% else %>
+<h4><%= sanitize @article[:title] %></h4>
+<% end %>
 <h6><%= sanitize @article[:author] %></h6>
 <span class="badge badge-inverse"><%= link_to "Original", "#{@original_url}" %></span>
 <span class="badge badge-info"><%= link_to "Reddit", "#{@reddit_url}" %></span>
 <hr>
-<p><%= sanitize @article[:text].gsub(/\n/,"<br>") %></p>
+<div class="article">
+<p><%= sanitize @article[:text].gsub(/\n/,"<br>") if @article[:text] %></p>
+</div>
 <% unless @article[:media].blank? %>
 	<% @article[:media].each do |vid| %>
 		<% if vid['type'].match("video") %>

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_session, :subs
+  helper_method :current_session, :cache_key, :subs
 
   def subs
     subs = Array.new    
@@ -13,6 +13,15 @@ class ApplicationController < ActionController::Base
           subs.push(subreddit)
         end
       end
+    else
+      r = Reddit::Api.new
+      mine = r.mine({:limit => 100})
+      unless mine.nil?
+        mine.map(&:url).each do |subreddit_url|
+          subreddit = subreddit_url.to_s.gsub("/r/","").gsub(/\//,"")
+          subs.push(subreddit)
+        end
+      end   
     end
     subs = subs.sort! { |a,b| a.downcase <=> b.downcase }
     return subs
@@ -27,6 +36,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def cache_key
+    if session[:cookie]
+      cachekey = session[:cookie].to_s.gsub(";","_").gsub(" ", "_")
+    else 
+      cachekey = "no_user_here"
+    end
+  end
+
   def authorize
     redirect_to login_url if session[:cookie].nil?
   end

@@ -1,28 +1,25 @@
 class RedditsController < ApplicationController
-  before_filter :authorize
+  caches_action :show, :expires_in => 1.minutes
+  caches_action :subreddit, :expires_in => 1.minutes
 
   def index
     r = Reddit::Api.new
   	@articles = r.browse("", {:limit => 100, :section => "hot", :cookie => session[:cookie]})
     @subs = subs
-#    if stale? etag: [@articles, current_session]
       respond_to do |format|
         format.html
         format.xml {render xml: @articles}
       end
-#    end
   end
 
   def saved
     r = Reddit::Api.new
     @saved_articles = r.saved({:limit => 100, :cookie => session[:cookie], :user => params[:user].to_s})
     @subs = subs
-#    if stale? etag: [@articles, current_session]
-      respond_to do |format|
-        format.html
-        format.xml {render xml: @saved_articles}
-      end
-#  end
+    respond_to do |format|
+      format.html
+      format.xml {render xml: @saved_articles}
+    end
   end
 
 
@@ -41,24 +38,20 @@ class RedditsController < ApplicationController
     @article = get_content_from_url(@original_url,options)
     logger.info "#{@article[:stats].to_s}" 
     @subs = subs
-#    if stale? etag: [@article, current_session]
-      respond_to do |format|
-        format.html
-        format.xml {render xml: @articles}
-      end
-#    end
+    respond_to do |format|
+      format.html
+      format.xml {render xml: @articles}
+    end
   end
 
   def subreddit
     r = Reddit::Api.new
   	@articles = r.browse("#{params[:id]}", {:limit => 100, :section => "hot",:cookie => session[:cookie]})
     @subs = subs
-#    if stale? etag: [@article, current_session]
-      respond_to do |format|
-        format.html
-        format.xml {render xml: @articles}
-      end
-#    end
+    respond_to do |format|
+      format.html
+      format.xml {render xml: @articles}
+    end
   end
 
   def get_content_from_url(url,options={})
@@ -67,11 +60,8 @@ class RedditsController < ApplicationController
       article = biffbot.parse(@original_url,options)
     else
       article = Hash.new
-#      raise url.to_s
       article[:text] = "<img src='#{url}'>"
-#      raise article[:text].to_s
       article[:title] = options[:submission_title] if options[:submission_title]
-
     end
     return article
   end

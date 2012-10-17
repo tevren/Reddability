@@ -54,14 +54,13 @@
                     <div class="accordion-inner">
                       <ul class="nav nav-list">
                         <li><a href="<%= root_path %>">Home <i class="icon-home"></i></a></li>
-                        <% unless current_session.blank? %><li><%= link_to "Saved", :controller => "reddits", :action => "saved", :user => session[:user] %></li><% end %>
+                        <% unless current_session.blank? %><li><%= link_to "Saved", :controller => "reddits", :action => "saved", :user => session[:user].to_s %></li><% end %>
                         <li><%= unless current_session.blank?
                               link_to "Log Out", logout_path 
                             else
                               link_to "Login", login_path
                             end %></li>
                         <li><%= link_to "Reddit", "https://www.reddit.com" %></li>
-                        <li><%= link_to "GitHub", "https://www.github.com" %></li>
                       </ul>
                     </div>
                   </div>
@@ -69,12 +68,14 @@
                   <div class="accordion-heading">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion2" href="#collapseLinkTwo">Subreddits</a>
                   </div>
-                  <div id="collapseLinkTwo" class="accordion-body collapse in">
+                  <div id="collapseLinkTwo" class="accordion-body collapse">
                     <div class="accordion-inner">
                       <ul class="nav nav-list">
-                        <% unless @subs.nil? %>
-                          <% @subs.each do |item| %>
-                            <li><%= link_to item, :controller => "reddits", :action => "subreddit", :id => item %></li>
+                        <% cache ["subs",cache_key], :expires_in => 1.minutes do %>
+                          <% unless @subs.nil? %>
+                            <% @subs.each do |item| %>
+                              <li><%= link_to item, :controller => "reddits", :action => "subreddit", :id => item %></li>
+                            <% end %>
                           <% end %>
                         <% end %>
                       </ul>
@@ -88,7 +89,7 @@
             </div><!--/span-->
               <footer class="span8 offset2">
                 <hr>
-                <p>&copy; Anurag Mohanty 2012</p>
+                <p>&copy; <%= link_to "Reddability", "https://github.com/tevren/Reddability" %>,  Anurag Mohanty 2012</p>
               </footer>
             </div><!--/row-->
         </div><!--/content-->

@@ -1,23 +1,26 @@
-<%= stylesheet_link_tag "readability", :document => "#{@original_url}" %>
 <div class="content">
 <ul class="breadcrumb">
 	<li><a href="<%= root_path %>"><i class="icon-home"></i></a><span class="divider">/</span></li>
 	<li><%= link_to @subreddit, :controller => "reddits", :action => "subreddit", :id => @subreddit %><span class="divider">/</span></li>
 	<li><%= sanitize truncate(@article[:title],:length => 70) if @article[:title] %></li>
 </ul>
-
+<span class="lead">
 <% if @article[:title].blank? %>
-<h4><%= sanitize @submission_title %></h4>
+<%= sanitize @submission_title.chomp %>
 <% else %>
-<h4><%= sanitize @article[:title] %></h4>
+<%= sanitize @article[:title].chomp %>
 <% end %>
-<h6><%= sanitize @article[:author] %></h6>
+</span>
+<% unless @article[:author].blank? %>
+	<h6><%= sanitize @article[:author] %></h6>
+<% else %>
+	<br>
+<% end %>
 <span class="badge badge-inverse"><%= link_to "Original", "#{@original_url}" %></span>
 <span class="badge badge-info"><%= link_to "Reddit", "#{@reddit_url}" %></span>
 <hr>
-<div class="article">
 <p><%= sanitize @article[:text].gsub(/\n/,"<br>") if @article[:text] %></p>
-</div>
+
 <% unless @article[:media].blank? %>
 	<% @article[:media].each do |vid| %>
 		<% if vid['type'].match("video") %>
@@ -25,6 +28,7 @@
 			<iframe src="<%= link %>" width="420" height="315" frameborder='0' allowfullscreen></iframe>
 		<% end %>
 	<% end %>
+	<br>
 <% end %>
 
 <% unless @article[:tags].nil? %>

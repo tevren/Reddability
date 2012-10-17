@@ -1,4 +1,5 @@
 set :stages,%w(production)
+#set :default_environment["PATH"] = "/usr/local/rvm/rubies/ruby-1.9.3-p286/bin:$PATH"
 set :default_stage, "production"
 require 'capistrano/ext/multistage'
 require 'capistrano/ext/multistage'
@@ -40,19 +41,5 @@ namespace :deploy do
 
 end
 
-desc "check production task"
-task :check_production do 
-	if stage.to_s == "production"
-		puts "\n are you REALLY sure you want to deploy to production?"
-		puts "\n Enter the password to continue\n"
-		password = STDIN.gets[0..7] rescue nil
-		if password != 'd0itwaterb0y'
-			puts "\n !!! WRONG PASSWORD !!!"
-			exit
-		end
-	end
-end
-
-before "deploy", "check_production"
 after 'deploy:update_code', 'deploy:symlink_shared'
 

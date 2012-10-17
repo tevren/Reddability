@@ -15,21 +15,6 @@ GIT
     ruby_reddit_api (0.2.6)
       httparty
 
-GIT
-  remote: git://github.com/tevren/pismo.git
-  revision: 989a67020021c2addce518544950faaa683f98f1
-  branch: merge_with_deplorable
-  specs:
-    pismo (0.7.3)
-      awesome_print
-      chronic
-      fast-stemmer
-      fastimage (>= 1)
-      htmlentities
-      nokogiri
-      phrasie (>= 0.1.4)
-      sanitize
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -61,7 +46,6 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
-    awesome_print (1.1.0)
     biffbot (0.0.2)
       httparty
     builder (3.0.4)
@@ -71,7 +55,8 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    chronic (0.6.7)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -84,11 +69,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    fast-stemmer (1.0.1)
-    fastimage (1.2.13)
     highline (1.6.13)
     hike (1.2.1)
-    htmlentities (4.3.1)
     httparty (0.9.0)
       multi_json (~> 1.0)
       multi_xml
@@ -118,8 +100,6 @@ GEM
     net-ssh (2.5.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nokogiri (1.5.5)
-    phrasie (0.1.5)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -154,8 +134,6 @@ GEM
     rspec-expectations (2.11.3)
       diff-lcs (~> 1.1.3)
     rspec-mocks (2.11.3)
-    sanitize (2.0.3)
-      nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -184,9 +162,9 @@ PLATFORMS
 DEPENDENCIES
   biffbot
   capistrano
+  capistrano-ext
   coffee-rails (~> 3.2.1)
   jquery-rails
-  pismo!
   rails (= 3.2.3)
   rspec
   ruby_reddit_api!

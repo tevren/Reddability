@@ -4,7 +4,6 @@ gem 'rails', '3.2.3'
 gem 'sqlite3'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'ruby_reddit_api', :git => 'git://github.com/tevren/RubyRedditAPI.git'
-gem 'pismo', :git => 'git://github.com/tevren/pismo.git', :branch => 'merge_with_deplorable'
 gem 'biffbot'
 
 
@@ -13,10 +12,6 @@ gem 'biffbot'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platform => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -33,7 +28,10 @@ gem 'rspec'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-ext'
+end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

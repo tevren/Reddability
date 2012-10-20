@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     subs = Array.new    
     if session[:cookie]
       r = Reddit::Api.new
-      mine = r.mine({:limit => 100, :cookie => session[:cookie]})
+      mine = r.mine({:limit => 75, :cookie => session[:cookie]})
       unless mine.nil?
         mine.map(&:url).each do |subreddit_url|
           subreddit = subreddit_url.to_s.gsub("/r/","").gsub(/\//,"")
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       end
     else
       r = Reddit::Api.new
-      mine = r.mine({:limit => 100})
+      mine = r.mine({:limit => 75})
       unless mine.nil?
         mine.map(&:url).each do |subreddit_url|
           subreddit = subreddit_url.to_s.gsub("/r/","").gsub(/\//,"")

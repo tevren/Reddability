@@ -31,6 +31,7 @@ gem 'rspec'
 group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
+  gem 'rvm-capistrano'
 end
 
 # To use debugger

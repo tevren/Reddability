@@ -1,5 +1,5 @@
 class RedditsController < ApplicationController
-  caches_action :show, :expires_in => 1.minutes
+  caches_action :show, :expires_in => 3.minutes
   caches_action :subreddit, :expires_in => 1.minutes
 
   def index
@@ -40,7 +40,7 @@ class RedditsController < ApplicationController
     @subs = subs
     respond_to do |format|
       format.html
-      format.xml {render xml: @articles}
+      format.xml {render xml: @article}
     end
   end
 

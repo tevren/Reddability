@@ -1,11 +1,11 @@
 set :stages,%w(production)
-#set :default_environment["PATH"] = "/usr/local/rvm/rubies/ruby-1.9.3-p286/bin:$PATH"
+set :default_environment["PATH"] = "/usr/local/rvm/rubies/ruby-1.9.3-p286/bin:$PATH"
 set :default_stage, "production"
 require 'capistrano/ext/multistage'
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require 'date'
-#require "rvm/capistrano"       
+require "rvm/capistrano"       
 set :repository,  "git://github.com/tevren/Reddability.git"
 set :scm,:git
 set :application, "Reddability"

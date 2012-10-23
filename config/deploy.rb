@@ -1,5 +1,4 @@
 set :stages,%w(production)
-set :default_environment["PATH"] = "/usr/local/rvm/rubies/ruby-1.9.3-p286/bin:$PATH"
 set :default_stage, "production"
 require 'capistrano/ext/multistage'
 require 'capistrano/ext/multistage'
@@ -17,7 +16,6 @@ set :deploy_via, :remote_cache
 
 set :branch do
   default_tag = `git tag`.split("\n").last
-
   tag = Capistrano::CLI.ui.ask "Tag to deploy (make sure to push the tag first): [#{default_tag}] "
   tag = default_tag if tag.empty?
   tag

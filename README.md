@@ -6,6 +6,8 @@ Reddit in Readability's style
 
 1. setup the sessions DB
 
+	$ bundle install
+
     $ rake db:migrate
 
 2. run the server

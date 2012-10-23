@@ -6,11 +6,11 @@ Reddit in Readability's style
 
 1. setup the sessions DB
 
-	$ rake db:migrate
+    $ rake db:migrate
 
 2. run the server
 
-	$ rails s
+    $ rails s
 
 ## Roadmap
 

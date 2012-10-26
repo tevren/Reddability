@@ -2,6 +2,8 @@
 
 Reddit in Readability's style
 
+up in production here: [Reddability](http://www.reddability.com/)
+
 ## Installation
 
 1. setup the sessions DB

@@ -19,7 +19,7 @@
 <span class="badge badge-inverse"><%= link_to "Original", "#{@original_url}" %></span>
 <span class="badge badge-info"><%= link_to "Reddit", "#{@reddit_url}" %></span>
 <hr>
-<p><%= sanitize @article[:text].gsub(/\n/,"<br>") if @article[:text] %></p>
+<p class="article"><%= sanitize @article[:text].gsub(/\n/,"<br>") if @article[:text] %></p>
 
 <% unless @article[:media].blank? %>
 	<% @article[:media].each do |vid| %>

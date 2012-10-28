@@ -12,11 +12,12 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= analytics_init if Rails.env.production? %>
   </head>
   <body>
     <div class="container">
       <div class="row">
-        <div class="span8 offset2">
+        <div class="span9 offset1">
         <% flash.each do |name, msg| %>
           <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
             <a class="close" data-dismiss="alert">×</a>
@@ -30,7 +31,7 @@
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span8 offset2 accordion" id="accordion1">
+           <div class="span9 offset1 accordion" id="accordion1">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="accordion1" href="#collapseOne">Reddability</a>
               </div>
@@ -87,7 +88,7 @@
               </div>
 
             </div><!--/span-->
-              <footer class="span8 offset2">
+              <footer class="span9 offset1">
                 <hr>
                 <p>&copy; <%= link_to "Reddability", "https://github.com/tevren/Reddability" %> v.<%= app_revision.chomp %>,  Anurag Mohanty 2012</p>
               </footer>

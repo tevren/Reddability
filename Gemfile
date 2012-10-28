@@ -5,7 +5,7 @@ gem 'sqlite3'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'ruby_reddit_api', :git => 'git://github.com/tevren/RubyRedditAPI.git'
 gem 'biffbot'
-
+gem 'google-analytics-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

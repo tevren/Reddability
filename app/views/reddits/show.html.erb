@@ -1,15 +1,17 @@
+<% if @article[:title].blank? %>
+	<% mytitle = sanitize @submission_title.to_s.chomp %>	
+<% else %>
+	<% mytitle = @article[:title].to_s.chomp %>	
+<% end %>
+<% title "#{mytitle}" %>
 <div class="content">
 <ul class="breadcrumb">
 	<li><a href="<%= root_path %>"><i class="icon-home"></i></a><span class="divider">/</span></li>
 	<li><%= link_to @subreddit, :controller => "reddits", :action => "subreddit", :id => @subreddit %><span class="divider">/</span></li>
-	<li><%= sanitize truncate(@article[:title],:length => 70) if @article[:title] %></li>
+	<li><%= sanitize truncate(mytitle,:length => 70) if mytitle %></li>
 </ul>
 <span class="lead">
-<% if @article[:title].blank? %>
-<%= sanitize @submission_title.chomp %>
-<% else %>
-<%= sanitize @article[:title].chomp %>
-<% end %>
+	<%= mytitle %>
 </span>
 <% unless @article[:author].blank? %>
 	<h6><%= sanitize @article[:author] %></h6>

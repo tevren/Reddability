@@ -1,3 +1,4 @@
+require 'digest/sha1'
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_session, :cache_key, :subs
@@ -38,9 +39,9 @@ class ApplicationController < ActionController::Base
   
   def cache_key
     if session[:cookie]
-      cachekey = session[:cookie].to_s.gsub(";","_").gsub(" ", "_")
+      cachekey = Digest::SHA1.hexdigest(session[:cookie].to_s.gsub(";","_").gsub(" ", "_"))
     else 
-      cachekey = "no_user_here"
+      cachekey = Digest::SHA1.hexdigest("no_user_here")
     end
   end
 

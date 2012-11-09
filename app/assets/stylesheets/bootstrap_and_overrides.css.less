@@ -75,6 +75,7 @@ body {
 // Example:
 // @linkColor: #ff0000;
 @baseFontSize:          14px;
+@articleFontSize:       15px;
 // @baseFontFamily:        @serifFontFamily;
 .breadcrumb {
   padding: 4px 4px;
@@ -90,24 +91,18 @@ body {
     text-shadow: 0 1px 0 @white;
   }
 }
-
-// Hover state, but only for links
-.badge-info {
-  background-color: @btnPrimaryBackground;
+.icon-plus{
+  background-position: -408px -99px;
 }
-.badge a {
-  font-size: @baseFontSize * .846;
-  font-weight: bold;
-  line-height: 14px; // ensure proper line-height if floated
-  color: @white;
-  vertical-align: baseline;
-  white-space: nowrap;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+.icon-remove{
+  background-position: -312px -2px;
+}
+.icon-home{
+  background-position: 2px -25px;
 }
 .article {
-  font-size: 16px;
-  line-height:  25px;
-  font-family: @sansFontFamily;
+  font-size: @articleFontSize;
+  font-family: @baseFontFamily;
 }
 td a:visited {
   color: @gray;

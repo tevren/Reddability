@@ -10,8 +10,7 @@
 	<tbody>
 		<% @saved_articles.each do |article| %>
 			<tr>
-				<% submission = {:title => article.title, :id => article.id} %>
-			    <td><%= link_to article.title, :controller => "reddits", :action => "show", :subreddit => article.subreddit, :submission => submission, :id => Base64.urlsafe_encode64(article.url) %></td>
+			    <td><%= link_to article.title, :controller => "reddits", :action => "show", :subreddit => article.subreddit, :article => article.id, :id => Base64.urlsafe_encode64(article.url) %></td>
 			    <td><%= link_to article.subreddit, :controller => "reddits", :action => "subreddit", :id => article.subreddit %></td>
 			    <td><%= article.domain %></td>
 			</tr>

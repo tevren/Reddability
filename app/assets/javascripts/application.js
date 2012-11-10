@@ -17,3 +17,10 @@
 //= require twitter/bootstrap/bootstrap-tooltip
 //= require twitter/bootstrap/bootstrap-button
 //= require twitter/bootstrap/bootstrap-collapse
+
+$('#subreddit_go_button').bind('click', function(){
+
+    // Perform javascript redirect
+    window.location = '/r/' + $('#appendedInputButton').val();
+
+});

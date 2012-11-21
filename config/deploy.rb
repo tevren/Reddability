@@ -35,9 +35,11 @@ namespace :deploy do
   task :symlink_shared do
     run "ln -nfs #{deploy_to}/shared/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{deploy_to}/shared/app_config.yml #{release_path}/config/app_config.yml"
+    run "ln -nfs #{deploy_to}/shared/production.sqlite3 #{release_path}/db/production.sqlite3"
   end
 
 end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
-
+after "deploy", "deploy:migrate"
+after "deploy", "deploy:restart"

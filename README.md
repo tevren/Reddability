@@ -20,9 +20,7 @@ up in production here: [Reddability](http://www.reddability.com/)
 
 1. Save article to your reddit account
 
-2. Navigate to reddit of your choice (this will be a form action).
-
-3. Moving to a more robust content extractor.
+2. Moving to a more robust content extractor.
 
 
 ## License

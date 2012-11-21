@@ -1,26 +1,34 @@
-<% if @article[:title].blank? %>
+<div class="content">
+	<% cache ["article_header", @ckey], :expires_in => 1.minutes do %>
+	<% if @article[:title].blank? %>
 	<% mytitle = sanitize @submission_title.to_s.chomp %>	
 <% else %>
 	<% mytitle = @article[:title].to_s.chomp %>	
 <% end %>
 <% title "#{mytitle}" %>
-<div class="content">
 <ul class="breadcrumb">
 	<li><a href="<%= root_path %>"><i class="icon-home"></i></a><span class="divider">/</span></li>
 	<li><%= link_to @subreddit, :controller => "reddits", :action => "subreddit", :id => @subreddit %><span class="divider">/</span></li>
-	<li><%= sanitize truncate(mytitle,:length => 70) if mytitle %></li>
+	<li><%= sanitize truncate(@article[:title],:length => 70) if @article[:title] %></li>
 </ul>
 <span class="lead">
-	<%= mytitle %>
+<% if @article[:title].blank? %>
+<%= sanitize @submission_title.chomp %>
+<% else %>
+<%= sanitize @article[:title].chomp %>
+<% end %>
 </span>
 <% unless @article[:author].blank? %>
 	<h6><%= sanitize @article[:author] %></h6>
 <% else %>
 	<br>
 <% end %>
-<span class="badge badge-inverse"><%= link_to "Original", "#{@original_url}" %></span>
-<span class="badge badge-info"><%= link_to "Reddit", "#{@reddit_url}" %></span>
+<%= link_to "Original", "#{@original_url}", :class => "btn btn-mini btn-primary"%>
+<%= link_to "Reddit", "#{@reddit_url}", :class =>"btn btn-mini btn-info" %>
+<% end %>
+<!-- insert buttons for saved and not saved here -->
 <hr>
+<% cache ["article_body", @ckey], :expires_in => 1.minutes do %>
 <p class="article"><%= sanitize @article[:text].gsub(/\n/,"<br>") if @article[:text] %></p>
 
 <% unless @article[:media].blank? %>
@@ -33,10 +41,11 @@
 	<br>
 <% end %>
 
-<% unless @article[:tags].nil? %>
-<strong>Tags:</strong>
-<% @article[:tags].each do |tag| %>
-	<span class="badge"><%= tag %></span>
-<% end %>
+	<% unless @article[:tags].nil? %>
+		<strong>Tags:</strong>
+		<% @article[:tags].each do |tag| %>
+			<span class="badge"><%= tag %></span>
+		<% end %>
+	<% end %>
 <% end %>
 </div>

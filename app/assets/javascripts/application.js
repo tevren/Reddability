@@ -24,3 +24,4 @@ $('#subreddit_go_button').bind('click', function(){
     window.location = '/r/' + $('#appendedInputButton').val();
 
 });
+

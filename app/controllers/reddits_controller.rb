@@ -62,7 +62,7 @@ class RedditsController < ApplicationController
   end
 
   def get_content_from_url(url,options={})
-    unless url.match(/(jpg|png|gif|jpeg|bmp|tiff)$/)
+    unless url.match(/(jpg|png|gif|jpeg|bmp|tiff)$/i)
       biffbot = Biffbot::Base.new(APP_CONFIG['DIFFBOT_TOKEN'])
       article = biffbot.parse(@original_url,options)
     else      

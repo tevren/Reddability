@@ -1,5 +1,5 @@
 <div class="content">
-	<% cache ["article_header", @ckey], :expires_in => 1.minutes do %>
+	<% cache ["article_header", @ckey], :expires_in => 3.minutes do %>
 	<% if @article[:title].blank? %>
 	<% mytitle = sanitize @submission_title.to_s.chomp %>	
 <% else %>
@@ -28,7 +28,7 @@
 <% end %>
 <!-- insert buttons for saved and not saved here -->
 <hr>
-<% cache ["article_body", @ckey], :expires_in => 1.minutes do %>
+<% cache ["article_body", @ckey], :expires_in => 3.minutes do %>
 <p class="article"><%= sanitize @article[:text].gsub(/\n/,"<br>") if @article[:text] %></p>
 
 <% unless @article[:media].blank? %>

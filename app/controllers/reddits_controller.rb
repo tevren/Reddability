@@ -1,6 +1,6 @@
 require 'digest/sha1'
 class RedditsController < ApplicationController
-  caches_action :show, :expires_in => 3.minutes
+#  caches_action :show, :expires_in => 3.minutes
   caches_action :subreddit, :expires_in => 1.minutes
 
   def index
@@ -64,7 +64,7 @@ class RedditsController < ApplicationController
   def get_content_from_url(url,options={})
     unless url.match(/(jpg|png|gif|jpeg|bmp|tiff)$/i)
       biffbot = Biffbot::Base.new(APP_CONFIG['DIFFBOT_TOKEN'])
-      article = biffbot.parse(@original_url,options)
+      article = biffbot.parse(url,options)
     else      
       article = Hash.new
       article[:text] = "<img src='#{url}'>"

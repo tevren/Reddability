@@ -1,0 +1,14 @@
+%table
+  %thead
+    %tr
+      %th Title
+      %th /r/
+      %th Source
+  %tbody
+    - @articles.each do |article|
+      %tr
+        %td
+          %a{:href => "/r/#{article.subreddit}/#{Base64.urlsafe_encode64(article.url)}"}>#{article.title}
+        %td
+          %a{:href => "/r/#{article.subreddit}"}#{article.subreddit}
+        %td #{article.domain}

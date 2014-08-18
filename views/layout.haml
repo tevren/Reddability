@@ -1,0 +1,46 @@
+!!! 5
+/ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+/[if IE 8 ]    <html class=\"ie8\" lang=\"en\">
+/[if IE 9 ]    <html class=\"ie9\" lang=\"en\">
+/[if (gt IE 9)|!(IE)] <!--> <html lang=\"en\">
+
+%head
+  %meta{ :charset => "utf-8" }
+  %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+
+  %title= @title || "Reddability"
+
+  %link{:rel=>"stylesheet", :href=>"/assets/app.css"}
+  %script{:src=>"/assets/modernizr.js"}
+%body
+  .row
+    .off-canvas-wrap{"data-offcanvas" => ""}
+      .inner-wrap
+        %nav{:class => 'tab-bar'}
+          %section{:class => 'tab-bar-section'}
+            %h1{:class => 'title'}Reddability
+          %section{:class => 'right-small'}
+            %a{:class => 'right-off-canvas-toggle menu-icon', :href => "#"}
+              %span
+
+        %aside{:class => 'right-off-canvas-menu'}
+          %ul{:class => 'off-canvas-list'}
+            %li
+              %label Navigation
+            %li
+              %a{:href => '/'}Home
+            %li
+              %a{:href => 'https://www.reddit.com'}Reddit
+
+        %section{:class => 'main-section'}
+          = yield
+
+        %a{:class => 'exit-off-canvas'}
+    .zurb-footer-bottom
+      %p{:class => 'copyright'}
+        %hr
+        &copy;
+        %a{:href=> "https://github.com/tevren/Reddability"}Reddability
+        v.#{VERSION_INFO['version']}, Anurag Mohanty 2012
+  %script{:src=>"/assets/app.js"}
+
